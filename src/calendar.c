@@ -9,9 +9,9 @@ const int32_t DEF_TIME = 946674000;  // 00-01-100 00:00:00 GMT+0000
 const int32_t LEAP_YEAR_SEC = 31622400;  // Total second in leap year: 2000
 
 
-uint32_t _random(const uint32_t min, const uint32_t max)
+int32_t _random(const int32_t min, const int32_t max)
 {
-    uint32_t result = rand() & 0xff;
+    int32_t result = rand() & 0xff;
 
     result ^= (rand() & 0xff) << 8;
     result ^= (rand() & 0xff) << 16;
@@ -50,7 +50,8 @@ Date* get_date_by_second(const int32_t second)
     tmp_time_buffer.tm_year += 1900;
     tmp_time_buffer.tm_mon++;
 
-    return get_date(tmp_time_buffer.tm_year, tmp_time_buffer.tm_mon, tmp_time_buffer.tm_mday);
+    return get_date((int16_t)tmp_time_buffer.tm_year, (int16_t)tmp_time_buffer.tm_mon,
+                    (int16_t)tmp_time_buffer.tm_mday);
 }
 
 
@@ -64,7 +65,7 @@ Date** get_brithdays(const size_t num_of_brithdays)
     }
 
     for (size_t i = 0; i < num_of_brithdays; ++i) {
-        uint32_t second = _random(0, LEAP_YEAR_SEC);
+        int32_t second = _random(0, LEAP_YEAR_SEC);
         brithdays[i] = get_date_by_second(second);
     }
 
