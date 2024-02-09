@@ -54,7 +54,7 @@ Date* get_date_by_second(const int32_t second)
 }
 
 
-Date** get_brithdays(const int num_of_brithdays)
+Date** get_brithdays(const size_t num_of_brithdays)
 {
     Date** brithdays = calloc(num_of_brithdays, sizeof(Date*));
 
